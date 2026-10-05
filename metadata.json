@@ -1,0 +1,6 @@
+{
+  "name": "Jothi Cheettu",
+  "description": "A modern, mobile-friendly record keeping application for weekly family and local savings schemes (Jothi Cheettu).",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

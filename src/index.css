@@ -1,0 +1,38 @@
+@import "tailwindcss";
+
+@layer base {
+  body {
+    font-family: 'Plus Jakarta Sans', 'Noto Sans Tamil', sans-serif;
+  }
+}
+
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  .print\:border-solid {
+    border-style: solid !important;
+  }
+  .print\:bg-white {
+    background-color: #ffffff !important;
+  }
+  .print\:border-black {
+    border-color: #000000 !important;
+  }
+  .print\:hidden {
+    display: none !important;
+  }
+  /* Show only the modal receipt dialog contents */
+  div[role="dialog"],
+  .fixed.inset-0.z-50 {
+    position: absolute !important;
+    left: 0 !important;
+    top: 0 !important;
+    width: 100% !important;
+    background: white !important;
+    visibility: visible !important;
+  }
+  .fixed.inset-0.z-50 * {
+    visibility: visible !important;
+  }
+}

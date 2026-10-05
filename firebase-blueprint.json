@@ -1,0 +1,152 @@
+{
+  "entities": {
+    "Admin": {
+      "title": "Admin",
+      "description": "Administrator record granting organizer privileges",
+      "type": "object",
+      "properties": {
+        "email": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["email", "createdAt"]
+    },
+    "Member": {
+      "title": "Member",
+      "description": "A member participating in one or more seetus with dedicated credentials",
+      "type": "object",
+      "properties": {
+        "memberId": { "type": "string", "maxLength": 50 },
+        "uid": { "type": "string", "maxLength": 128 },
+        "fullName": { "type": "string", "maxLength": 100 },
+        "mobileNumber": { "type": "string", "maxLength": 20 },
+        "email": { "type": "string", "maxLength": 120 },
+        "address": { "type": "string", "maxLength": 250 },
+        "numberOfSeetus": { "type": "number" },
+        "joiningDate": { "type": "string", "maxLength": 50 },
+        "role": { "type": "string", "enum": ["member", "admin"] },
+        "status": { "type": "string", "enum": ["Active", "Inactive"] },
+        "notes": { "type": "string", "maxLength": 500 },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["memberId", "fullName", "mobileNumber", "email", "numberOfSeetus", "joiningDate", "role"]
+    },
+    "Seetu": {
+      "title": "Seetu",
+      "description": "A specific weekly seetu savings slot (51 weeks, default ₹100/wk)",
+      "type": "object",
+      "properties": {
+        "seetuId": { "type": "string", "maxLength": 50 },
+        "memberId": { "type": "string", "maxLength": 50 },
+        "uid": { "type": "string", "maxLength": 128 },
+        "memberName": { "type": "string", "maxLength": 100 },
+        "memberMobile": { "type": "string", "maxLength": 20 },
+        "memberEmail": { "type": "string", "maxLength": 120 },
+        "weeklyAmount": { "type": "number" },
+        "totalWeeks": { "type": "number" },
+        "totalExpectedAmount": { "type": "number" },
+        "weeksPaid": { "type": "number" },
+        "weeksRemaining": { "type": "number" },
+        "amountPaid": { "type": "number" },
+        "amountRemaining": { "type": "number" },
+        "startDate": { "type": "string", "maxLength": 50 },
+        "maturityDate": { "type": "string", "maxLength": 50 },
+        "extraInterestAmount": { "type": "number" },
+        "maturityAmount": { "type": "number" },
+        "status": { "type": "string", "enum": ["Active", "Completed", "Pending", "Matured"] },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["seetuId", "memberId", "memberName", "weeklyAmount", "totalWeeks", "totalExpectedAmount", "weeksPaid", "weeksRemaining", "amountPaid", "amountRemaining", "status"]
+    },
+    "Payment": {
+      "title": "Payment",
+      "description": "Weekly payment transaction record for a seetu",
+      "type": "object",
+      "properties": {
+        "paymentId": { "type": "string", "maxLength": 60 },
+        "memberId": { "type": "string", "maxLength": 50 },
+        "uid": { "type": "string", "maxLength": 128 },
+        "memberName": { "type": "string", "maxLength": 100 },
+        "seetuId": { "type": "string", "maxLength": 50 },
+        "weekNumber": { "type": "number" },
+        "paymentDate": { "type": "string", "maxLength": 50 },
+        "amount": { "type": "number" },
+        "paymentMethod": { "type": "string", "maxLength": 50 },
+        "notes": { "type": "string", "maxLength": 200 },
+        "receiptNo": { "type": "string", "maxLength": 50 },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["paymentId", "memberId", "seetuId", "weekNumber", "paymentDate", "amount"]
+    },
+    "Maturity": {
+      "title": "Maturity",
+      "description": "Maturity settlement record for a completed 51-week seetu",
+      "type": "object",
+      "properties": {
+        "maturityId": { "type": "string", "maxLength": 60 },
+        "seetuId": { "type": "string", "maxLength": 50 },
+        "memberId": { "type": "string", "maxLength": 50 },
+        "uid": { "type": "string", "maxLength": 128 },
+        "memberName": { "type": "string", "maxLength": 100 },
+        "memberMobile": { "type": "string", "maxLength": 20 },
+        "totalContribution": { "type": "number" },
+        "extraInterestAmount": { "type": "number" },
+        "maturityAmount": { "type": "number" },
+        "maturityDate": { "type": "string", "maxLength": 50 },
+        "status": { "type": "string", "enum": ["Eligible", "Settled", "Pending"] },
+        "settledDate": { "type": "string", "maxLength": 50 },
+        "settledNotes": { "type": "string", "maxLength": 250 },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["maturityId", "seetuId", "memberId", "totalContribution", "extraInterestAmount", "maturityAmount", "status"]
+    },
+    "Settings": {
+      "title": "Settings",
+      "description": "Organizer configuration and scheme defaults for Jothi Cheettu",
+      "type": "object",
+      "properties": {
+        "cheettuName": { "type": "string", "maxLength": 100 },
+        "organizerName": { "type": "string", "maxLength": 100 },
+        "mobileNumber": { "type": "string", "maxLength": 20 },
+        "adminEmail": { "type": "string", "maxLength": 120 },
+        "upiId": { "type": "string", "maxLength": 80 },
+        "gpayNumber": { "type": "string", "maxLength": 20 },
+        "qrCodeUrl": { "type": "string", "maxLength": 1000 },
+        "weeklyAmount": { "type": "number" },
+        "totalWeeks": { "type": "number" },
+        "defaultExtraAmount": { "type": "number" },
+        "businessAddress": { "type": "string", "maxLength": 250 },
+        "disclaimer": { "type": "string", "maxLength": 300 },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["cheettuName", "weeklyAmount", "totalWeeks", "defaultExtraAmount"]
+    }
+  },
+  "firestore": {
+    "/admins/{adminId}": {
+      "schema": { "$ref": "#/entities/Admin" },
+      "description": "Authorized organizers and admins"
+    },
+    "/members/{memberId}": {
+      "schema": { "$ref": "#/entities/Member" },
+      "description": "Scheme members list with UID links"
+    },
+    "/seetus/{seetuId}": {
+      "schema": { "$ref": "#/entities/Seetu" },
+      "description": "Weekly seetu records"
+    },
+    "/payments/{paymentId}": {
+      "schema": { "$ref": "#/entities/Payment" },
+      "description": "Weekly collection payment entries"
+    },
+    "/maturities/{maturityId}": {
+      "schema": { "$ref": "#/entities/Maturity" },
+      "description": "Maturity calculation and payout settlement records"
+    },
+    "/settings/{settingsDocId}": {
+      "schema": { "$ref": "#/entities/Settings" },
+      "description": "Jothi Cheettu system configurations and payment details"
+    }
+  }
+}
